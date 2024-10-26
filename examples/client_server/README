@@ -1,0 +1,8 @@
+# Navigate to project root
+$ cd bytes_structure/
+
+# Run server in one terminal window
+$ python -m examples.client_server.server
+
+# Run client from another terminal window
+$ python -m examples.client_server.client

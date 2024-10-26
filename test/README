@@ -1,0 +1,11 @@
+# Navigate to test folder
+$ cd bytes_structure/test/
+
+# Install Pytest if not installed
+$ pip install -r requirements.txt
+
+# Run all the tests
+$ pytest -s
+
+# Run specific test only
+$ pytest -s test_byte_structure.py::test_base_deleted_fields
