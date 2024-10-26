@@ -1,0 +1,48 @@
+Connected to server
+==================================Iteration 0===================================
+Sending msg v1 to server MessageV1:
+-- ver 1
+-- msg_id 100
+-- data_len 5
+-- data b'hello'
+Received raw data from server b'\x01\x00d\x05hello\x05world'
+MessageV2:
+-- ver 1
+-- msg_id 100
+-- data_len 5
+-- data b'hello'
+-- additional_data_len 5
+-- additional_data b'world'
+================================================================================
+==================================Iteration 1===================================
+Sending msg v1 to server MessageV1:
+-- ver 1
+-- msg_id 100
+-- data_len 5
+-- data b'hello'
+Received raw data from server b'\x01\x00d\x05hello\x05world'
+MessageV2:
+-- ver 1
+-- msg_id 100
+-- data_len 5
+-- data b'hello'
+-- additional_data_len 5
+-- additional_data b'world'
+================================================================================
+==================================Iteration 2===================================
+Sending msg v1 to server MessageV1:
+-- ver 1
+-- msg_id 100
+-- data_len 5
+-- data b'hello'
+Received raw data from server b'\x01\x00d\x05hello\x05world'
+MessageV2:
+-- ver 1
+-- msg_id 100
+-- data_len 5
+-- data b'hello'
+-- additional_data_len 5
+-- additional_data b'world'
+================================================================================
+^CInterrupted
+Connection closed

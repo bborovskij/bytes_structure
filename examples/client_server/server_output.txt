@@ -1,0 +1,52 @@
+Listening for client
+Accepted client from ('127.0.0.1', 50204)
+==================================Iteration 0===================================
+Received message from client: b'\x01\x00d\x05hello'
+MessageV1:
+-- ver 1
+-- msg_id 100
+-- data_len 5
+-- data b'hello'
+Sending msg v2 to client
+MessageV2:
+-- ver 1
+-- msg_id 100
+-- data_len 5
+-- data b'hello'
+-- additional_data_len 5
+-- additional_data b'world'
+================================================================================
+==================================Iteration 1===================================
+Received message from client: b'\x01\x00d\x05hello'
+MessageV1:
+-- ver 1
+-- msg_id 100
+-- data_len 5
+-- data b'hello'
+Sending msg v2 to client
+MessageV2:
+-- ver 1
+-- msg_id 100
+-- data_len 5
+-- data b'hello'
+-- additional_data_len 5
+-- additional_data b'world'
+================================================================================
+==================================Iteration 2===================================
+Received message from client: b'\x01\x00d\x05hello'
+MessageV1:
+-- ver 1
+-- msg_id 100
+-- data_len 5
+-- data b'hello'
+Sending msg v2 to client
+MessageV2:
+-- ver 1
+-- msg_id 100
+-- data_len 5
+-- data b'hello'
+-- additional_data_len 5
+-- additional_data b'world'
+================================================================================
+==================================Iteration 3===================================
+Connection closed
