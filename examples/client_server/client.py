@@ -13,7 +13,7 @@ if __name__ == "__main__":
             while True:
                 print(f"Iteration {i}".center(80, "="))
                 msg_v1 = MessageV1(
-                    parsed_fields_map=dict(ver=1, msg_id=100, data_len=5, data=b"hello")
+                    fields_map=dict(ver=1, msg_id=100, data_len=5, data=b"hello")
                 )
                 print(f"Sending msg v1 to server {msg_v1}")
                 client_sock.sendall(msg_v1.get_raw())

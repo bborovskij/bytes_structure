@@ -1,0 +1,3 @@
+Parse raw bytes into Python data structure and create bytes message from Python data structure.
+
+See examples/ to start.

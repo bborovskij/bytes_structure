@@ -377,7 +377,7 @@ def test_parse_bytes_from_fields():
     class DerivedMessage(BaseMessage):
         var_len_field = Field(lambda self: f">{self.len}s")
 
-    cmd = DerivedMessage(parsed_fields_map=dict(len=5, var_len_field=b"hello"))
+    cmd = DerivedMessage(fields_map=dict(len=5, var_len_field=b"hello"))
     assert cmd.len == 5
     assert cmd.var_len_field == b"hello"
     assert cmd.get_raw() == b"\x00\x05hello"
@@ -395,7 +395,7 @@ def test_parse_bytes_from_fields_when_msg_and_fields_set_or_not_set():
         match="Either msg or parsed_fields_map should be provided. Not both.",
     ):
         DerivedMessage(
-            b"\x00\x05hello", parsed_fields_map=dict(len=5, var_len_field=b"hello")
+            b"\x00\x05hello", fields_map=dict(len=5, var_len_field=b"hello")
         )
 
     with pytest.raises(

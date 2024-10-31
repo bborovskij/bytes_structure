@@ -90,11 +90,11 @@ class ByteStructureBase:
         self,
         msg: Optional[bytes | bytearray] = None,
         *,
-        parsed_fields_map: Optional[Dict[str, Any]] = None,
+        fields_map: Optional[Dict[str, Any]] = None,
     ):
         self.__flags = 0
 
-        if (not msg) == (not parsed_fields_map):
+        if (not msg) == (not fields_map):
             raise Errors.MessageArgError(
                 "Either msg or parsed_fields_map should be provided. Not both."
             )
@@ -107,8 +107,8 @@ class ByteStructureBase:
             self.__msg = msg
             self.__msg_len = len(msg)
             self.__parse_fields_from_bytes()
-        elif parsed_fields_map:
-            self.parsed_fields_map = parsed_fields_map
+        elif fields_map:
+            self.parsed_fields_map = fields_map
             self.__parse_bytes_from_fields()
 
     @staticmethod
