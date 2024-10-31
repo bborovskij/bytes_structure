@@ -1,6 +1,27 @@
+# MIT License
+#
+# Copyright (c) 2024 Bohdan Borovskyi
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
 import struct
 from functools import wraps
-from typing import Callable, Any, Dict, Optional
+from typing import Callable, Any, Dict, Optional, Union
 from collections import OrderedDict
 
 
@@ -31,7 +52,7 @@ class Errors:
 class Field:
     __counter = 0
 
-    def __init__(self, fmt: str | Callable[..., Any]):
+    def __init__(self, fmt: Union[str, Callable[..., Any]]):
         if not fmt:
             raise Errors.EmptyFormatError("No fmt specified")
         self.__fmt = fmt
@@ -88,7 +109,7 @@ class ByteStructureBase:
 
     def __init__(
         self,
-        msg: Optional[bytes | bytearray] = None,
+        msg: Optional[Union[bytes, bytearray]] = None,
         *,
         fields_map: Optional[Dict[str, Any]] = None,
     ):
@@ -99,7 +120,7 @@ class ByteStructureBase:
                 "Either msg or parsed_fields_map should be provided. Not both."
             )
 
-        self.__msg: bytes | bytearray = b""
+        self.__msg: Union[bytes, bytearray] = b""
         self.__msg_len: int = 0
         self.parsed_fields_map: Dict[str, Any] = {}
 
@@ -209,7 +230,7 @@ class ByteStructureBase:
         return sum(obj.get_expected_size(self) for obj in fields_obj)
 
     @__precondition(_flags=Flags.PARSED)
-    def get_raw(self) -> bytes | bytearray:
+    def get_raw(self) -> Union[bytes, bytearray]:
         """
         Return full raw message as it is received on init.
         """
