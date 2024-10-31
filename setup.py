@@ -32,7 +32,7 @@ setuptools.setup(
         "Programming Language :: Python :: 3.12",
     ],
     python_requires=">=3.6",
-    packages='bytes_structure',  # Automatically find packages
+    packages=setuptools.find_packages(),  # Automatically find packages
     long_description=Path("README").read_text(),  # Assuming your README file is README.md
     long_description_content_type="text/markdown",
 )
