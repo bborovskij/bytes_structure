@@ -33,6 +33,6 @@ setuptools.setup(
     ],
     python_requires=">=3.6",
     packages='bytes_structure',  # Automatically find packages
-    long_description=Path("README.md").read_text(),  # Assuming your README file is README.md
+    long_description=Path("README").read_text(),  # Assuming your README file is README.md
     long_description_content_type="text/markdown",
 )
