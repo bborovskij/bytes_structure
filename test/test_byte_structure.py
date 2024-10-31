@@ -350,7 +350,7 @@ def test_base_precondition_for_get_size():
     msg1 = b"\x00\x05hello"
     cmd = DerivedMessage(msg1)
 
-    cmd._ByteStructureBase__flags = 0
+    cmd.flags = 0
 
     with pytest.raises(
         Errors.FailedPreconditionError, match="Required flag 0x01 but 0x00 set"

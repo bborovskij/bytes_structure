@@ -100,6 +100,24 @@ class Field:
 class Flags:
     PARSED = 1 << 0  # Set once raw message is parsed
 
+def precondition(*, _flags: int):
+    """
+    Check if method is allowed to run at that point of time.
+    """
+
+    def outer(func):
+        @wraps(func)
+        def inner(self: "ByteStructureBase", *args, **kwargs):
+            if not (self.flags & _flags):
+                raise Errors.FailedPreconditionError(
+                    f"Required flag 0x{_flags:02x} but 0x{self.flags:02x} set"
+                )
+            return func(self, *args, **kwargs)
+
+        return inner
+
+    return outer
+
 
 class ByteStructureBase:
     def __new__(cls, *args, **kwargs):
@@ -113,7 +131,7 @@ class ByteStructureBase:
         *,
         fields_map: Optional[Dict[str, Any]] = None,
     ):
-        self.__flags = 0
+        self.flags = 0
 
         if (not msg) == (not fields_map):
             raise Errors.MessageArgError(
@@ -131,25 +149,6 @@ class ByteStructureBase:
         elif fields_map:
             self.parsed_fields_map = fields_map
             self.__parse_bytes_from_fields()
-
-    @staticmethod
-    def __precondition(*, _flags: int):
-        """
-        Check if method is allowed to run at that point of time.
-        """
-
-        def outer(func):
-            @wraps(func)
-            def inner(self: "ByteStructureBase", *args, **kwargs):
-                if not (self.__flags & _flags):
-                    raise Errors.FailedPreconditionError(
-                        f"Required flag 0x{_flags:02x} but 0x{self.__flags:02x} set"
-                    )
-                return func(self, *args, **kwargs)
-
-            return inner
-
-        return outer
 
     def __parse_bytes_from_fields(self):
         data = b""
@@ -170,7 +169,7 @@ class ByteStructureBase:
                 raise Errors.PackError(
                     f'Error packing "{name}:{fmt}" with size {size}: "{value}"'
                 )
-        self.__flags |= Flags.PARSED
+        self.flags |= Flags.PARSED
 
         msg_len = len(data)
         exp_len = self.get_expected_size()
@@ -206,7 +205,7 @@ class ByteStructureBase:
             raise Errors.NoFieldsParsedError(
                 "No fields parsed. Ensure all fields are of Field type with correct struct format"
             )
-        self.__flags |= Flags.PARSED
+        self.flags |= Flags.PARSED
 
     def get_fields_and_their_names(self) -> Dict[str, Field]:
         fields_map = OrderedDict()
@@ -221,7 +220,7 @@ class ByteStructureBase:
             fields_map.update(cls_fields)
         return fields_map
 
-    @__precondition(_flags=Flags.PARSED)
+    @precondition(_flags=Flags.PARSED)
     def get_expected_size(self):
         """
         Sum of struct.calcsize(fmt) of all fixed and variable length Fields.
@@ -229,14 +228,14 @@ class ByteStructureBase:
         fields_obj = self.get_fields_and_their_names().values()
         return sum(obj.get_expected_size(self) for obj in fields_obj)
 
-    @__precondition(_flags=Flags.PARSED)
+    @precondition(_flags=Flags.PARSED)
     def get_raw(self) -> Union[bytes, bytearray]:
         """
         Return full raw message as it is received on init.
         """
         return self.__msg
 
-    @__precondition(_flags=Flags.PARSED)
+    @precondition(_flags=Flags.PARSED)
     def __repr__(self):
         str_builder = [f"{self.__class__.__name__}:"]
         for k, v in self.parsed_fields_map.items():
