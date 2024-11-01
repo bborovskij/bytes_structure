@@ -1,7 +1,7 @@
 from pathlib import Path
 import setuptools
 
-VERSION = "0.1.0"  # PEP-440
+VERSION = "0.1.1"  # PEP-440
 NAME = "bytes-structure"
 
 setuptools.setup(
