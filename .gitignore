@@ -2,3 +2,5 @@
 .idea/
 __pycache__/
 bytes_structure.egg-info/
+build/
+dist/

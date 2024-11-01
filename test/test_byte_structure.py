@@ -1,7 +1,7 @@
 import struct
 
 import pytest
-from bytes_structure.bytes_structure import Field, ByteStructureBase, Errors
+from bytes_structure import Field, ByteStructureBase, Errors
 
 data = bytearray(
     [
