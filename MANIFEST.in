@@ -1,0 +1,5 @@
+include README
+include LICENSE
+recursive-include bytes_structure *.py
+recursive-include examples *
+recursive-include test *
