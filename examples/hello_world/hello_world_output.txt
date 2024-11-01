@@ -1,0 +1,24 @@
+0 ProtocolV1:
+-- ver 1
+-- word1 b'hello'
+1 1 b'hello'
+2 Raw first_message_v1: b'\x01hello'
+3 ProtocolV2:
+-- ver 1
+-- word1 b'hello'
+-- len 5
+-- word2 b'world'
+4 1 b'hello' 5 b'world'
+5 Raw first_message_v2: b'\x01hello'
+6 ProtocolV1:
+-- ver 1
+-- word1 b'hello'
+7 1 b'hello'
+8 Raw second_message_v1: b'\x01hello'
+9 ProtocolV2:
+-- ver 1
+-- word1 b'hello'
+-- len 5
+-- word2 b'world'
+10 1 b'hello' 5 b'world'
+11 Raw second_message_v2: b'\x01hello\x05world_with_dummy_data_that_wont_be_parsed'

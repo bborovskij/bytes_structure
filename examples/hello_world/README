@@ -1,1 +1,5 @@
+Make sure bytes_structure is installed
 Basic usage example.
+
+$ cd examples/hello_world/
+$ python hello_world.py

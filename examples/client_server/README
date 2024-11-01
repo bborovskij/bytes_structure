@@ -1,8 +1,10 @@
-# Navigate to project root
-$ cd bytes_structure/
+Make sure bytes_structure is installed.
+
+# Navigate to client_server directory
+$ cd examples/client_server/
 
 # Run server in one terminal window
-$ python -m examples.client_server.server
+$ python server.py
 
 # Run client from another terminal window
-$ python -m examples.client_server.client
+$ python client.py

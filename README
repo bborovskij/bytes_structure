@@ -1,3 +1,9 @@
 Parse raw bytes into Python data structure and create bytes message from Python data structure.
 
+# Install locally
+$ pip install
+
 See examples/ to start.
+
+# Remove
+$ pip uninstall bytes-structure
