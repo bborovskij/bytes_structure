@@ -100,6 +100,7 @@ class Field:
 class Flags:
     PARSED = 1 << 0  # Set once raw message is parsed
 
+
 def precondition(*, _flags: int):
     """
     Check if method is allowed to run at that point of time.
