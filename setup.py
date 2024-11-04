@@ -1,7 +1,7 @@
 from pathlib import Path
 import setuptools
 
-VERSION = "0.1.2"  # PEP-440
+VERSION = "0.1.3"  # PEP-440
 NAME = "bytes-structure"
 
 setuptools.setup(
@@ -33,6 +33,8 @@ setuptools.setup(
     ],
     python_requires=">=3.6",
     packages=setuptools.find_packages(),  # Automatically find packages
-    long_description=Path("README").read_text(),  # Assuming your README file is README.md
+    long_description=Path(
+        "README"
+    ).read_text(),  # Assuming your README file is README.md
     long_description_content_type="text/markdown",
 )

@@ -394,9 +394,7 @@ def test_parse_bytes_from_fields_when_msg_and_fields_set_or_not_set():
         Errors.MessageArgError,
         match="Either msg or parsed_fields_map should be provided. Not both.",
     ):
-        DerivedMessage(
-            b"\x00\x05hello", fields_map=dict(len=5, var_len_field=b"hello")
-        )
+        DerivedMessage(b"\x00\x05hello", fields_map=dict(len=5, var_len_field=b"hello"))
 
     with pytest.raises(
         Errors.MessageArgError,

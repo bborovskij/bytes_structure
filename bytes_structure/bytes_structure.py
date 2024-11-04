@@ -23,6 +23,7 @@ import struct
 from functools import wraps
 from typing import Callable, Any, Dict, Optional, Union
 from collections import OrderedDict
+from collections.abc import Sized
 
 
 class Errors:
@@ -56,7 +57,7 @@ class Field:
         if not fmt:
             raise Errors.EmptyFormatError("No fmt specified")
         self.__fmt = fmt
-        self.var_len = callable(fmt)
+        self.is_var_len = callable(fmt)
         self.name = None
         self.counter = Field.__counter
         Field.__counter += 1
@@ -68,7 +69,7 @@ class Field:
         """
         Return fixed or variable length format of Field.
         """
-        if self.var_len:
+        if self.is_var_len:
             try:
                 return self.__fmt(instance)
             except (KeyError, AttributeError):
@@ -164,6 +165,11 @@ class ByteStructureBase:
             fmt = field.get_fmt(self)
             size = field.get_expected_size(self)
             value = self.parsed_fields_map[name]
+            if isinstance(value, Sized):
+                if len(value) < size:
+                    raise Errors.OutOfBoundError(
+                        "Going out of bonds or incorrect endianness for len in case of var len field"
+                    )
             try:
                 data += struct.pack(fmt, value)
             except struct.error:
