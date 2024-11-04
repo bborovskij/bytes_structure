@@ -13,7 +13,7 @@ bytes-structure is a Python library that allows you to conveniently define and p
 - **Easy Protocol Definition**: Define binary protocols using intuitive Python classes and Field descriptors.
 - **Fixed and Variable-Length Fields**: Supports both fixed-size and variable-size fields, including those dependent on previous fields.
 - **Protocol Versioning**: Extend protocols with new fields in newer versions using class inheritance.
-- **Serialization and Deserialization**: Effortlessly pack structured data into raw bytes and unpack raw bytes into structured data.
+- **Serialization and Deserialization**: Pack structured data into raw bytes and unpack raw bytes into structured data.
 - **Robust Error Handling**: Comprehensive error checking and exceptions for reliable protocol parsing.
 
 
@@ -34,13 +34,14 @@ bytes-structure is a Python library that allows you to conveniently define and p
 ## Usage/Examples
 
 ### Defining Protocols
-Define your binary protocol by creating a class that inherits from ByteStructureBase and declaring Field attributes. Fields are defined using standard Python [struct format strings](https://docs.python.org/3/library/struct.html#format-characters), ensuring familiarity and ease of use.
+Define your binary protocol by creating a class that inherits from ByteStructureBase and declaring Field attributes.
+Field's format is defined using standard Python [struct format strings](https://docs.python.org/3/library/struct.html#format-characters), ensuring familiarity and ease of use.
 
 ```python
 from bytes_structure import ByteStructureBase, Field
 
 class ProtocolV1(ByteStructureBase):
-    ver = Field('>B')      # Big-endian (1 byte)
+    ver = Field('>B')      # Big-endian unsigned char (1 byte)
     word1 = Field('>5s')   # Big-endian 5-byte string
 
 ```
@@ -140,15 +141,16 @@ print(parsed_message.word2)   # Outputs: b'world'
 
 ByteStructure aims to:
 
-**Conveniently Define Binary Protocols**: Simplify the definition of binary messages with an intuitive and declarative approach, keeping the implementation simple and minimal.
-**Leverage Well-Known Formats**: Utilize Python's built-in struct module and familiar format strings, ensuring ease of understanding and use.
-**Support Protocol Versioning**: Enable protocols to evolve by adding new fields in new versions without breaking compatibility with older versions.
+- **Conveniently Define Binary Protocols**: Simplify the definition of binary messages with an intuitive and declarative approach, keeping the implementation simple and minimal.
+- **Leverage Well-Known Formats**: Utilize Python's built-in struct module and familiar format strings, ensuring ease of understanding and use.
+- **Support Protocol Versioning**: Enable protocols to evolve by adding new fields in new versions without breaking compatibility with older versions.
+
 ## Why ByteStructure?
 
-**Simplicity**: With a minimal codebase, ByteStructure focuses on making binary protocol handling as straightforward as possible.
-**Familiarity**: By using Python's standard struct format strings, you don't need to learn any new syntax or conventions.
-**Flexibility**: Supports both fixed and variable-length fields, making it suitable for a wide range of binary protocols.
-**Extensibility**: Easily extend existing protocols by subclassing and adding new fields.
+- **Simplicity**: With a minimal codebase, ByteStructure focuses on making binary protocol handling as straightforward as possible.
+- **Familiarity**: By using Python's standard struct format strings, you don't need to learn any new syntax or conventions.
+- **Flexibility**: Supports both fixed and variable-length fields, making it suitable for a wide range of binary protocols.
+- **Extensibility**: Easily extend existing protocols by subclassing and adding new fields.
 ## License
 
 This project is licensed under the MIT License.
